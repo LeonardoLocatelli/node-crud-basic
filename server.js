@@ -67,18 +67,17 @@ routes.put("/alterar", (req, res) => {
     try {
     connection.connect();
 
-    connection.query ( ' UPDATE jogos SET id = ?, Nome = ?, Valor = ? WHERE id = ? ' , [ 8, ' GTA V' , 200 ,  10 ] , function (error, results, fields) {     
+    connection.query ( ' UPDATE jogos SET id = ?, Nome = ?, Valor = ? WHERE id = ? ' , [ 8, 'Far cry Primal' , 200 ,  8 ] , function (error, results, fields) {     
 
             if (error) res.status(500).send({"sucesso": false, "errors": error, "data": {}});
 
             res.send({"sucesso": true, "errors": [], "data": results});
-
         });
     } catch (error) {
         console.log(`Tivemos erros na execução: ${error}`)
     } finally {
         connection.end();
-}   
+    }   
 });
 
 
@@ -86,7 +85,7 @@ routes.delete("/deletar", (req, res) => {
     try {
         connection.connect();
 
-        connection.query('DELETE FROM jogos where id = "id" ' ,[10],  function (error, results, fields) {
+        connection.query('DELETE FROM jogos where id = ? ' ,[10],  function (error, results, fields) {
             
             if (error) res.status(500).send({"sucesso": false, "errors": error, "data": {}});
 
@@ -98,7 +97,6 @@ routes.delete("/deletar", (req, res) => {
         connection.end();
     }    
 });
-
 
 app.listen(process.env.PORT || port, () =>
     console.log(`Aplicação rodando e ouvindo na porta ${port}`)
